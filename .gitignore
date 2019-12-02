@@ -27,3 +27,7 @@ prelude-cheatsheet.el
 prelude-cheatsheet.aux
 prelude-cheatsheet.log
 transient/
+.cache/
+anaconda-mode/
+smex-items
+
