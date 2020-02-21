@@ -1,3 +1,6 @@
+(which-key-add-key-based-replacements "M-s h" "highlight")
+(global-unset-key (kbd "M-s ESC"))
+
 (global-set-key (kbd "C--") 'negative-argument)
 (global-set-key (kbd "M-\\") 'just-one-space)
 (global-unset-key (kbd "C-+"))
