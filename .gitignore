@@ -30,4 +30,5 @@ transient/
 .cache/
 anaconda-mode/
 smex-items
+.yas-compiled-snippets.el
 
