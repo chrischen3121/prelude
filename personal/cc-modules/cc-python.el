@@ -1,4 +1,4 @@
-(prelude-require-packages '(pyenv-mode pytest blacken importmagic)) ; py-isort
+(prelude-require-packages '(pyenv-mode pytest blacken)) ; py-isort
 
 ; remove prelude-python-mode-set-encoding
 (defun prelude-python-mode-defaults ()
@@ -56,9 +56,6 @@
             (define-key python-mode-map (kbd "C-c t o") 'pytest-one)
             (define-key python-mode-map (kbd "C-c t d") 'pytest-directory)
             (define-key python-mode-map (kbd "C-c t p") 'pytest-pdb-one)))
-
-;; import magic
-(add-hook 'python-mode-hook 'importmagic-mode)
 
 ;; keybindings
 (add-hook 'python-mode-hook (lambda ()
