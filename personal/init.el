@@ -2,10 +2,10 @@
 (add-to-list 'load-path cc-modules-dir)
 (message "Loading chrischen's modules...")
 
+(require 'cc-theme)
 (require 'cc-better-defaults)
-(require 'cc-keybindings)
-; (require 'cc-python)
 (require 'cc-dev)
-
+(require 'cc-python)
+(require 'cc-elisp)
 
 (message "Happy Hacking!🌅🚣🏝️")

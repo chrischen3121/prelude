@@ -1,0 +1,4 @@
+(setq prelude-theme nil)
+
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
