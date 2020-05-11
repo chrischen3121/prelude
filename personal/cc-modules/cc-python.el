@@ -1,4 +1,6 @@
-(prelude-require-packages '(pyenv-mode pytest blacken)) ; py-isort
+;; pip install -U blacken isort pytest autoflake
+;; pip install -U jedi json-rpc service_factory ;; anaconda-mode deps
+(prelude-require-packages '(pyenv-mode pytest blacken py-isort pippel ein)) ;;autoflake, DAP, pycoverage
 
 ; remove prelude-python-mode-set-encoding
 (defun prelude-python-mode-defaults ()
@@ -17,6 +19,7 @@
   (add-hook 'post-self-insert-hook
             #'electric-layout-post-self-insert-function nil 'local))
 (setq prelude-python-mode-hook 'prelude-python-mode-defaults)
+(add-hook 'python-mode-hook #'anaconda-eldoc-mode)
 
 ;; pyenv
 (defun pyenv-mode-set-local-version ()
@@ -43,9 +46,14 @@
 
 ;; blacken
 (custom-set-variables '(blacken-line-length 100))
-(add-hook 'python-mode-hook
-          (lambda ()
-            (define-key python-mode-map (kbd "<backtab>") 'blacken-buffer)))
+
+;; isort
+(setq py-isort-options '("--lines=100"))
+
+(defun py-format-buffer ()
+  (interactive)
+  (blacken-buffer)
+  (py-isort-buffer))
 
 ;; pytest
 (add-hook 'python-mode-hook
@@ -56,6 +64,26 @@
             (define-key python-mode-map (kbd "C-c t o") 'pytest-one)
             (define-key python-mode-map (kbd "C-c t d") 'pytest-directory)
             (define-key python-mode-map (kbd "C-c t p") 'pytest-pdb-one)))
+
+;; ein(Emacs IPython Notebook)
+(add-hook 'ein:notebook-mode-hook
+          (lambda ()
+            (local-unset-key (kbd "C-c M-{"))
+            (local-unset-key (kbd "C-c M-}"))
+            (local-unset-key (kbd "C-c C-t"))
+            (local-unset-key (kbd "C-c C-u"))
+            (local-unset-key (kbd "C-c C-o"))
+            (define-key ein:notebook-mode-map (kbd "S-<return>") 'ein:worksheet-execute-cell-and-goto-next-km)
+            (define-key ein:notebook-mode-map (kbd "M-p") 'ein:worksheet-goto-prev-input-km)
+            (define-key ein:notebook-mode-map (kbd "M-n") 'ein:worksheet-goto-next-input-km)
+            (define-key ein:notebook-mode-map (kbd "C-c p") 'ein:worksheet-insert-cell-above)
+            (define-key ein:notebook-mode-map (kbd "C-c n") 'ein:worksheet-insert-cell-below)
+            (define-key ein:notebook-mode-map (kbd "C-c s") 'ein:worksheet-split-cell-at-point)
+            (define-key ein:notebook-mode-map (kbd "C-c t") 'ein:worksheet-change-cell-type)
+            (define-key ein:notebook-mode-map (kbd "C-c r") 'ein:notebook-rename-command-km)
+            (define-key ein:notebook-mode-map (kbd "C-c C-f") 'ein:notebook-open-km)
+            ))
+
 
 ;; keybindings
 (add-hook 'python-mode-hook (lambda ()
@@ -71,5 +99,8 @@
                               (define-key python-mode-map (kbd "C-x 4 M-=")
                                 'anaconda-mode-find-assignments-other-window)
                               (define-key python-mode-map (kbd "C-x 5 M-=")
-                                'anaconda-mode-find-assignments-other-frame)))
+                                'anaconda-mode-find-assignments-other-frame)
+                              (define-key python-mode-map (kbd "C-c l") 'pippel-list-packages)
+                              (define-key python-mode-map (kbd "<backtab>") 'py-format-buffer)
+                              ))
 (provide 'cc-python)
