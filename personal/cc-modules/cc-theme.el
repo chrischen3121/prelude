@@ -1,6 +1,8 @@
 (prelude-require-package 'spacemacs-theme)
 
-(defvar default-theme 'spacemacs-light) ; 'zenburn
+; (defvar default-theme 'spacemacs-light)
+(defvar default-theme 'zenburn)
+
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions
