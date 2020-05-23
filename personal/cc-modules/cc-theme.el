@@ -1,7 +1,7 @@
 (prelude-require-package 'spacemacs-theme)
 
-; (defvar default-theme 'spacemacs-light)
-(defvar default-theme 'zenburn)
+(defvar default-theme 'spacemacs-light)
+; (defvar default-theme 'zenburn)
 
 
 (if (daemonp)
