@@ -1,6 +1,6 @@
 ;; pip install -U blacken isort pytest autoflake
 ;; pip install -U jedi json-rpc service_factory ;; anaconda-mode deps
-(prelude-require-packages '(pyenv-mode pytest blacken py-isort pippel ein)) ;;autoflake, DAP, pycoverage
+(prelude-require-packages '(pyenv-mode pytest blacken py-isort pippel ein sphinx-doc)) ;;autoflake, DAP, pycoverage
 
 ; remove prelude-python-mode-set-encoding
 (defun prelude-python-mode-defaults ()
@@ -54,6 +54,13 @@
   (interactive)
   (blacken-buffer)
   (py-isort-buffer))
+
+;; sphinx-doc
+(add-hook 'python-mode-hook
+          (lambda ()
+            (sphinx-doc-mode t)
+            (local-unset-key (kbd "C-c M-d"))
+            (define-key python-mode-map (kbd "C-c C-d") 'sphinx-doc)))
 
 ;; pytest
 (add-hook 'python-mode-hook

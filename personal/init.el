@@ -4,6 +4,7 @@
 
 (require 'cc-theme)
 (require 'cc-better-defaults)
+(require 'cc-doc)
 (require 'cc-dev)
 (require 'cc-python)
 (require 'cc-elisp)
