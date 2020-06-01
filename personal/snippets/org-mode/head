@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: title
+# key: <he
+# --
+#+TITLE: $1
+#+AUTHOR: ${2:Chris Chen}
+#+EMAIL: ${3:chrischen3121@gmail.com}
+#+OPTIONS: H:2 toc:2 num:3 ^:nil
+#+LANGUAGE: ${4:zh-CN}
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+SETUPFILE: ../../org-templates/level-1.org
+#+KEYWORDS: $0
