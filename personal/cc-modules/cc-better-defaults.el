@@ -37,6 +37,8 @@
 (define-key prelude-mode-map (kbd "C-c TAB") nil)
 (define-key prelude-mode-map (kbd "C-c I") nil)
 (define-key prelude-mode-map (kbd "C-c S") nil)
+(define-key prelude-mode-map (kbd "C-c i") nil)
+(define-key prelude-mode-map (kbd "C-c g") nil)
 
 (which-key-add-key-based-replacements "C-c r" "crux")
 (define-key prelude-mode-map (kbd "C-c r t") 'crux-visit-term-buffer)
@@ -64,18 +66,18 @@
 (which-key-add-key-based-replacements "C-x a" "abbrev")
 (which-key-add-key-based-replacements "C-x 8" "special-chars")
 (which-key-add-key-based-replacements "C-x @" "event-apply")
+(setq which-key-special-keys '("ESC"))
 
 ;; keybindings
 (which-key-add-key-based-replacements "M-s h" "highlight")
 (global-unset-key (kbd "M-s ESC"))
-
-(global-set-key (kbd "C--") 'negative-argument)
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "M-\\") 'just-one-space)
 (global-unset-key (kbd "C-+"))
-(global-set-key (kbd "C-l") 'ivy-backward-delete-char)
-(global-set-key (kbd "S-SPC") 'set-mark-command)
 
-(global-set-key (kbd "M-i") 'imenu)
+(global-set-key (kbd "C--") #'negative-argument)
+(global-set-key (kbd "C-c c") #'org-capture)
+(global-set-key (kbd "M-\\") #'just-one-space)
+(global-set-key (kbd "C-l") #'ivy-backward-delete-char)
+(global-set-key (kbd "S-SPC") #'set-mark-command)
+(global-set-key (kbd "C-c g") #'org-clock-goto)
 
 (provide 'cc-better-defaults)

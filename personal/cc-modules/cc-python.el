@@ -91,15 +91,6 @@
                                     (define-key ein:notebook-mode-map (kbd "C-c C-f")
                                       'ein:notebook-open-km)))
 
-;; hideshow
-(add-hook 'python-mode-hook (lambda ()
-                              (hs-minor-mode t)
-                              (which-key-add-key-based-replacements "C-c @" "hideshow")
-                              (define-key python-mode-map (kbd "C-c h") #'hs-hide-all)
-                              (define-key python-mode-map (kbd "C-c s") #'hs-show-all)
-                              (define-key python-mode-map (kbd "C-c l") #'hs-hide-level)
-                              (define-key python-mode-map (kbd "<backtab>") #'hs-toggle-hiding)))
-
 ;; keybindings
 (add-hook 'python-mode-hook (lambda ()
                               (which-key-add-key-based-replacements "C-c C-t" "python-skeleton")

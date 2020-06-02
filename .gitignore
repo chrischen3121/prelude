@@ -31,4 +31,5 @@ transient/
 anaconda-mode/
 smex-items
 .yas-compiled-snippets.el
+.dir-locals.el
 
