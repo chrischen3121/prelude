@@ -2,7 +2,7 @@
 ;; pip install -U jedi json-rpc service_factory ;; anaconda-mode deps
 (prelude-require-packages '(pyenv-mode pytest blacken py-isort pippel ein sphinx-doc)) ;;autoflake, DAP, pycoverage
 
-; remove prelude-python-mode-set-encoding
+;; remove prelude-python-mode-set-encoding
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
@@ -73,6 +73,7 @@
             (define-key python-mode-map (kbd "C-c t p") 'pytest-pdb-one)))
 
 ;; ein(Emacs IPython Notebook)
+;; TODO: integration with org
 (add-hook 'ein:notebook-mode-hook
           (lambda ()
             (local-unset-key (kbd "C-c M-{"))
@@ -91,6 +92,15 @@
             (define-key ein:notebook-mode-map (kbd "C-c C-f") 'ein:notebook-open-km)
             ))
 
+;; hideshow
+(add-hook 'python-mode-hook
+          (lambda ()
+            (hs-minor-mode t)
+            (which-key-add-key-based-replacements "C-c @" "hideshow")
+            (define-key python-mode-map (kbd "C-c h") #'hs-hide-all)
+            (define-key python-mode-map (kbd "C-c s") #'hs-show-all)
+            (define-key python-mode-map (kbd "C-c l") #'hs-hide-level)
+            (define-key python-mode-map (kbd "<backtab>") #'hs-toggle-hiding)))
 
 ;; keybindings
 (add-hook 'python-mode-hook (lambda ()
@@ -108,6 +118,6 @@
                               (define-key python-mode-map (kbd "C-x 5 M-=")
                                 'anaconda-mode-find-assignments-other-frame)
                               (define-key python-mode-map (kbd "C-c l") 'pippel-list-packages)
-                              (define-key python-mode-map (kbd "<backtab>") 'py-format-buffer)
+                              (define-key python-mode-map (kbd "C-c f") 'py-format-buffer)
                               ))
 (provide 'cc-python)
