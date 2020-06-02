@@ -53,4 +53,7 @@
                      )))
             ))
 
+;; (add-hook 'org-agenda 'function)
+
+
 (provide 'cc-doc)
