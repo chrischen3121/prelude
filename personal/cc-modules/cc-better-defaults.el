@@ -1,25 +1,24 @@
 ;; term
+(use-package
+  term
+  :bind (("C-x M-m" . ansi-term)
+         (:map term-mode-map)
+         ("C-c C-j" . term-line-mode)
+         ("C-c C-k" . term-char-mode)))
 
-(global-set-key (kbd "C-x M-m") 'ansi-term)
-
-(add-hook 'term-mode-hook
-          (lambda ()
-            (define-key term-mode-map (kbd "C-c C-j") 'term-line-mode)
-            (define-key term-mode-map (kbd "C-c C-k") 'term-char-mode)))
 
 ;; dired
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (define-key dired-mode-map (kbd "S-SPC") 'set-mark-command)))
+(use-package
+  dired
+  :bind ((:map dired-mode-map)
+         ("S-SPC" . set-mark-command)))
 
 ;; sudo editing
 (defun sudo ()
   "Use TRAMP to `sudo' the current buffer"
   (interactive)
-  (when buffer-file-name
-    (find-alternate-file
-     (concat (concat "/sudo:root@localhost:")
-             buffer-file-name))))
+  (when buffer-file-name (find-alternate-file (concat (concat "/sudo:root@localhost:")
+                                                      buffer-file-name))))
 
 ;; crux
 (define-key prelude-mode-map (kbd "C-c t") nil)

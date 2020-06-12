@@ -1,5 +1,6 @@
 ;; apt install plantuml
-(prelude-require-packages '(plantuml-mode)) ;; graphviz-dot-mode
+(prelude-require-packages '(graphviz-dot-mode plantuml-mode htmlize))
+
 
 (setq plantuml-executable-path "plantuml")
 (setq plantuml-default-exec-mode 'executable)
@@ -21,7 +22,8 @@
                                                             (tagside "left")))
                            (setq org-publish-project-alist '(("note-org" :base-directory
                                                               "~/repos/notes/org"
-                                                              :publishing-directory  "~/repos/notes"
+                                                              :publishing-directory
+                                                              "~/repos/notes"
                                                               :base-extension "org"
                                                               :recursive t
                                                               :publishing-function

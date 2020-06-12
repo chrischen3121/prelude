@@ -35,6 +35,10 @@
 (add-hook 'python-mode-hook (lambda ()
                               (pyenv-mode)
                               (pyenv-mode-set-local-version)))
+(add-hook 'pyenv-mode-hook (lambda ()
+                             (define-key pyenv-mode-map (kbd "C-c C-s") nil)
+                             (define-key pyenv-mode-map (kbd "C-c C-u") nil)))
+
 (add-hook 'projectile-after-switch-project-hook 'pyenv-mode-set-local-version)
 
 ;; python max line length
@@ -106,6 +110,7 @@
                                 'anaconda-mode-find-assignments-other-window)
                               (define-key python-mode-map (kbd "C-x 5 M-=")
                                 'anaconda-mode-find-assignments-other-frame)
+                              (define-key python-mode-map (kbd "C-c ?") 'anaconda-mode-show-doc)
                               (define-key python-mode-map (kbd "C-c l") 'pippel-list-packages)
                               (define-key python-mode-map (kbd "C-c f") 'py-format-buffer)))
 (provide 'cc-python)
