@@ -111,6 +111,6 @@
                               (define-key python-mode-map (kbd "C-x 5 M-=")
                                 'anaconda-mode-find-assignments-other-frame)
                               (define-key python-mode-map (kbd "C-c ?") 'anaconda-mode-show-doc)
-                              (define-key python-mode-map (kbd "C-c l") 'pippel-list-packages)
+                              (define-key python-mode-map (kbd "C-c C-l") 'pippel-list-packages)
                               (define-key python-mode-map (kbd "C-c f") 'py-format-buffer)))
 (provide 'cc-python)

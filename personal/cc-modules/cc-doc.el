@@ -22,8 +22,7 @@
                                                             (tagside "left")))
                            (setq org-publish-project-alist '(("note-org" :base-directory
                                                               "~/repos/notes/org"
-                                                              :publishing-directory
-                                                              "~/repos/notes"
+                                                              :publishing-directory "~/repos/notes"
                                                               :base-extension "org"
                                                               :recursive t
                                                               :publishing-function
@@ -56,5 +55,19 @@
 (add-hook 'org-mode-hook (lambda ()
                            (define-key org-mode-map (kbd "C-c i") #'org-clock-in)
                            (define-key org-mode-map (kbd "C-c o") #'org-clock-out)))
+
+(use-package
+  org
+  :defer t
+  :init (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t)
+                                                                 (shell . t)
+                                                                 (ditaa . t)
+                                                                 (dot . t)
+                                                                 (plantuml . t)
+                                                                 (python . t)
+                                                                 (C . t)
+                                                                 (lisp . t)
+                                                                 (sql . t)
+                                                                 (org . t))))
 
 (provide 'cc-doc)
