@@ -1,7 +1,7 @@
 ;; org agenda setup
 (setq agenda-home-dir "~/Dropbox/todo")
 (setq org-agenda-files (directory-files-recursively agenda-home-dir ".org$"))
-(setq org-refile-targets (quote ((nil :maxlevel . 1)
+(setq org-refile-targets (quote ((nil :maxlevel . 2)
                                  (org-agenda-files :maxlevel . 2))))
 (setq org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
                                      ("WAITING" ("WAITING" . t))
