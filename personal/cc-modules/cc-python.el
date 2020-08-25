@@ -45,7 +45,7 @@
 (setq python-max-line-length 100)
 (add-hook 'python-mode-hook (lambda ()
                               (custom-set-variables '(blacken-line-length python-max-line-length))
-                              (setq py-isort-options '("--lines=100"))))
+                              (setq py-isort-options '("-l 100"))))
 
 ;; format buffer
 (defun py-format-buffer ()
