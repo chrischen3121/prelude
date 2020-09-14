@@ -10,8 +10,7 @@
                             (which-key-add-key-based-replacements "C-c @" "hideshow")
                             (define-key prog-mode-map (kbd "C-c h") #'hs-hide-all)
                             (define-key prog-mode-map (kbd "C-c s") #'hs-show-all)
-                            (define-key prog-mode-map (kbd "C-c l") #'hs-hide-level)
-                            (define-key prog-mode-map (kbd "<backtab>") #'hs-toggle-hiding)))
+                            (define-key prog-mode-map (kbd "C-c l") #'hs-toggle-hiding)))
 
 (add-hook 'prog-mode-hook (lambda ()
                             (yas-minor-mode-on)
