@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: asyncmain2
+# key: asyncmain2
+# --
+from hylibx import event_loop, log
+
+
+async def main():
+    log.use_loguru()
+
+
+if __name__ == '__main__':
+    event_loop.run_until_complete(main())
