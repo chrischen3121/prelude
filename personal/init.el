@@ -10,5 +10,6 @@
 (require 'cc-dev)
 (require 'cc-python)
 (require 'cc-elisp)
+(require 'cc-rst)
 
 (message "Happy Hacking!🌅🚣🏝️")
