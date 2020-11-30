@@ -47,6 +47,7 @@
                               (custom-set-variables '(blacken-line-length python-max-line-length))
                               (setq py-isort-options '("-l 100"))))
 
+
 ;; format buffer
 (defun py-format-buffer ()
   (interactive)
@@ -67,6 +68,14 @@
                               (define-key python-mode-map (kbd "C-c t o") 'pytest-one)
                               (define-key python-mode-map (kbd "C-c t d") 'pytest-directory)
                               (define-key python-mode-map (kbd "C-c t p") 'pytest-pdb-one)))
+
+;; flycheck
+(add-hook 'python-mode-hook (lambda ()
+                              ;; run python-pylint only if python-flake8 produced no errors
+                              (flycheck-add-next-checker 'python-flake8 'python-pylint)
+                              ;; run python-mypy only if python-pylint produced no errors
+                              ;; (flycheck-add-next-checker 'python-pylint '(warning . python-mypy))
+                              ))
 
 ;; ein(Emacs IPython Notebook)
 ;; TODO: integration with org
