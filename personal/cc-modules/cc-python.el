@@ -77,6 +77,10 @@
                               ;; (flycheck-add-next-checker 'python-pylint '(warning . python-mypy))
                               ))
 
+;; flyspell
+(add-hook 'python-mode-hook (lambda ()
+                              (flyspell-mode-off)))
+
 ;; ein(Emacs IPython Notebook)
 ;; TODO: integration with org
 (add-hook 'ein:notebook-mode-hook (lambda ()

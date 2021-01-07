@@ -78,5 +78,6 @@
 (global-set-key (kbd "C-l") #'ivy-backward-delete-char)
 (global-set-key (kbd "S-SPC") #'set-mark-command)
 (global-set-key (kbd "C-c g") #'org-clock-goto)
+(global-set-key (kbd "M-s o") #'occur)
 
 (provide 'cc-better-defaults)
