@@ -27,9 +27,11 @@ prelude-cheatsheet.el
 prelude-cheatsheet.aux
 prelude-cheatsheet.log
 transient/
-.cache/
 anaconda-mode/
 smex-items
 .yas-compiled-snippets.el
 .dir-locals.el
+var/
+.cache/
+.lsp-session*
 
