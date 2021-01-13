@@ -6,6 +6,8 @@
          ("C-c C-j" . term-line-mode)
          ("C-c C-k" . term-char-mode)))
 
+;; hide menu
+(menu-bar-mode -1)
 
 ;; dired
 (use-package
@@ -79,5 +81,6 @@
 (global-set-key (kbd "S-SPC") #'set-mark-command)
 (global-set-key (kbd "C-c g") #'org-clock-goto)
 (global-set-key (kbd "M-s o") #'occur)
+(global-set-key (kbd "C-x g") #'magit-status)
 
 (provide 'cc-better-defaults)
