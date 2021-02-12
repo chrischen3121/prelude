@@ -9,8 +9,9 @@
 (add-hook 'org-mode-hook (lambda ()
                            (flyspell-mode)
                            (smartparens-mode)
+                           (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
                            (setq org-html-mathjax-options '((path
-                                                             "https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML")
+                                                             "https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML")
                                                             (scale "100")
                                                             (align "left")
                                                             (font "TeX")
