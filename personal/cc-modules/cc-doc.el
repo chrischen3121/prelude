@@ -1,9 +1,15 @@
 ;; apt install plantuml
-(prelude-require-packages '(graphviz-dot-mode plantuml-mode htmlize))
+(use-package
+  graphviz-dot-mode
+  :defer t)
 
+(use-package
+  plantuml-mode
+  :defer t
+  :config (custom-set-variables '(plantuml-executable-path "plantuml")
+                                '(plantuml-default-exec-mode 'executable)))
 
-(setq plantuml-executable-path "plantuml")
-(setq plantuml-default-exec-mode 'executable)
+(prelude-require-packages '(htmlize))
 
 (add-to-list 'auto-mode-alist '("\\.\\(org_archive\\)$" . org-mode))
 (add-hook 'org-mode-hook (lambda ()

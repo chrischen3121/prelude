@@ -1,22 +1,34 @@
 ;; yasnippet config
-(prelude-require-packages '(yasnippet yasnippet-snippets))
-(defconst cc-snippets-dir (expand-file-name "snippets" prelude-personal-dir))
-(push cc-snippets-dir yas-snippet-dirs)
-(yas-reload-all)
+(prelude-require-packages '(yasnippet-snippets))
 
-;; hideshow
+(add-hook 'hs-minor-mode-hook (lambda ()
+                                (define-key hs-minor-mode-map (kbd "C-c @") 'nil)
+                                (which-key-add-key-based-replacements "C-c h" "hideshow")
+                                (define-key hs-minor-mode-map (kbd "C-c h h") #'hs-hide-all)
+                                (define-key hs-minor-mode-map (kbd "C-c h s") #'hs-show-all)
+                                (define-key hs-minor-mode-map (kbd "C-c h l") #'hs-toggle-hiding)))
+
+(use-package
+  yasnippet
+  :defer t
+  :config (defconst cc-snippets-dir (expand-file-name "snippets" prelude-personal-dir))
+  (add-to-list 'yas-snippet-dirs 'cc-snippets-dir t)
+  (yas-load-directory cc-snippets-dir t)
+  :bind (("M-/" . yas-expand-from-trigger-key)))
+
+(use-package
+  yasnippet-snippets
+  :defer t)
+
+
 (add-hook 'prog-mode-hook (lambda ()
                             (hs-minor-mode t)
-                            (which-key-add-key-based-replacements "C-c @" "hideshow")
-                            (define-key prog-mode-map (kbd "C-c h") #'hs-hide-all)
-                            (define-key prog-mode-map (kbd "C-c s") #'hs-show-all)
-                            (define-key prog-mode-map (kbd "C-c l") #'hs-toggle-hiding)))
-
-(add-hook 'prog-mode-hook (lambda ()
                             (yas-minor-mode-on)
-                            (define-key prog-mode-map (kbd "M-/") 'yas-expand-from-trigger-key)))
+
+                            ;; TODO: highlight C-c l
+                            ))
+
 (add-hook 'org-mode-hook (lambda ()
-                           (yas-minor-mode-on)
-                           (define-key org-mode-map (kbd "M-/") 'yas-expand-from-trigger-key)))
+                           (yas-minor-mode-on)))
 
 (provide 'cc-dev)
