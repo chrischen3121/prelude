@@ -1,4 +1,8 @@
 ;; apt install plantuml
+
+(prelude-require-packages '(graphviz-dot-mode plantuml-mode))
+
+
 (use-package
   graphviz-dot-mode
   :defer t)

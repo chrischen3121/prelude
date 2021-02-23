@@ -1,3 +1,5 @@
+(prelude-require-packages '(sr-speedbar term))
+
 (use-package
   sr-speedbar
   :config (custom-set-variables '(speedbar-show-unknown-files t)
@@ -8,12 +10,12 @@
 ;; term
 (use-package
   term
-  :bind (("C-c t a" . ansi-term)
+  :bind (("C-c C-t a" . ansi-term)
          (:map term-mode-map)
          ("C-c C-j" . term-line-mode)
          ("C-c C-k" . term-char-mode)))
 
-(which-key-add-key-based-replacements "C-c t" "terminal")
+(which-key-add-key-based-replacements "C-c C-t" "terminal")
 (global-set-key (kbd "C-c t e") #'eshell)
 
 ;; hide menu bar

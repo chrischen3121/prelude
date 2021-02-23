@@ -1,5 +1,5 @@
 ;; yasnippet config
-(prelude-require-packages '(yasnippet-snippets))
+(prelude-require-packages '(yasnippet yasnippet-snippets))
 
 (add-hook 'hs-minor-mode-hook (lambda ()
                                 (define-key hs-minor-mode-map (kbd "C-c @") 'nil)

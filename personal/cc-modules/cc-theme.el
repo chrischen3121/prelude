@@ -1,3 +1,4 @@
+(prelude-require-packages '(spacemacs-theme))
 (use-package
   spacemacs-theme
   :defer t

@@ -1,24 +1,31 @@
-;; pip install -U blacken isort pytest autoflake
+;; pip install -U black isort pytest autoflake
 ;; pip install -U jedi json-rpc service_factory ;; anaconda-mode deps
-(prelude-require-packages '(pyenv-mode pytest blacken py-isort pippel ein sphinx-doc)) ;;autoflake, DAP, pycoverage
+(prelude-require-packages '(pyenv-mode blacken py-isort sphinx-doc pytest pippel ein)) ;;autoflake, DAP, pycoverage
 
 ;; remove prelude-python-mode-set-encoding
-(defun prelude-python-mode-defaults ()
+(defun python-mode-defaults ()
   "Defaults for Python programming."
-  (subword-mode +1)
+  ;; (subword-mode +1)
   (anaconda-mode 1)
   (eldoc-mode 1)
-  (setq-local electric-layout-rules '((?: . (lambda ()
-                                              (and (zerop (first (syntax-ppss)))
-                                                   (python-info-statement-starts-block-p)
-                                                   'after)))))
-  (when (fboundp #'python-imenu-create-flat-index)
-    (setq-local imenu-create-index-function #'python-imenu-create-flat-index))
-  (add-hook 'post-self-insert-hook #'electric-layout-post-self-insert-function nil 'local))
-(setq prelude-python-mode-hook 'prelude-python-mode-defaults)
-(add-hook 'python-mode-hook #'anaconda-eldoc-mode)
+  (anaconda-eldoc-mode 1)
+  (sphinx-doc-mode 1)
+  ;; (setq-local electric-layout-rules '((?: . (lambda ()
+  ;;                                             (and (zerop (first (syntax-ppss)))
+  ;;                                                  (python-info-statement-starts-block-p)
+  ;;                                                  'after)))))
+  ;; (add-hook 'post-self-insert-hook #'electric-layout-post-self-insert-function nil 'local)
+  )
+(setq prelude-python-mode-hook #'python-mode-defaults)
 
 ;; pyenv
+(use-package
+  pyenv-mode
+  :defer t
+  :bind ((:map pyenv-mode-map)
+         ("C-c C-s" . nil)
+         ("C-c C-u" . nil)))
+
 (defun pyenv-mode-set-local-version ()
   "Set pyenv version from \".python-version\" by looking in parent directories."
   (interactive)
@@ -35,18 +42,33 @@
 (add-hook 'python-mode-hook (lambda ()
                               (pyenv-mode)
                               (pyenv-mode-set-local-version)))
-(add-hook 'pyenv-mode-hook (lambda ()
-                             (define-key pyenv-mode-map (kbd "C-c C-s") nil)
-                             (define-key pyenv-mode-map (kbd "C-c C-u") nil)))
+(add-hook 'projectile-after-switch-project-hook #'pyenv-mode-set-local-version)
 
-(add-hook 'projectile-after-switch-project-hook 'pyenv-mode-set-local-version)
 
-;; python max line length
-(setq python-max-line-length 100)
-(add-hook 'python-mode-hook (lambda ()
-                              (custom-set-variables '(blacken-line-length python-max-line-length))
-                              (setq py-isort-options '("-l 100"))))
 
+;; set python max line length
+(defcustom python-max-line-length 100
+  "Line length to enforce."
+  :type 'integer
+  :safe 'integerp
+  :group 'cc-python)
+
+(use-package
+  blacken
+  :defer t
+  :config (customize-set-variable 'blacken-line-length python-max-line-length))
+
+(use-package
+  py-isort
+  :defer t
+  :config (customize-set-variable 'py-isort-options `(,(format "-l %d" python-max-line-length))))
+
+;; TODO: to check
+(use-package
+  sphinx-doc-mode
+  :bind ((:map sphinx-doc-mode-map)
+         ("C-c M-d" . nil)
+         ("C-c C-d" . sphinx-doc)))
 
 ;; format buffer
 (defun py-format-buffer ()
@@ -55,10 +77,10 @@
   (py-isort-buffer))
 
 ;; sphinx-doc
-(add-hook 'python-mode-hook (lambda ()
-                              (sphinx-doc-mode t)
-                              (local-unset-key (kbd "C-c M-d"))
-                              (define-key python-mode-map (kbd "C-c C-d") 'sphinx-doc)))
+;; (add-hook 'python-mode-hook (lambda ()
+;;                               (sphinx-doc-mode t)
+;;                               (local-unset-key (kbd "C-c M-d"))
+;;                               (define-key python-mode-map (kbd "C-c C-d") 'sphinx-doc)))
 
 ;; pytest
 (add-hook 'python-mode-hook (lambda ()
@@ -125,5 +147,5 @@
                                 'anaconda-mode-find-assignments-other-frame)
                               (define-key python-mode-map (kbd "C-c ?") 'anaconda-mode-show-doc)
                               (define-key python-mode-map (kbd "C-c C-l") 'pippel-list-packages)
-                              (define-key python-mode-map (kbd "C-c f") 'py-format-buffer)))
+                              (define-key python-mode-map (kbd "C-c f") #'py-format-buffer)))
 (provide 'cc-python)

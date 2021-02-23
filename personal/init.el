@@ -1,3 +1,6 @@
+(package-initialize)
+(unless package-archive-contents (package-refresh-contents))
+
 (prelude-require-packages
  '(use-package))
 (defconst cc-modules-dir (expand-file-name "cc-modules" prelude-personal-dir))
@@ -9,9 +12,6 @@
 (require 'cc-doc)
 (require 'cc-agenda)
 (require 'cc-dev)
-
-;; TODO: to check
-
 (require 'cc-python)
 (require 'cc-cpp)
 (require 'cc-elisp)
