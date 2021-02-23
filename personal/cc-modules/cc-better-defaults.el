@@ -10,8 +10,7 @@
 ;; term
 (use-package
   term
-  :bind (("C-c C-t a" . ansi-term)
-         (:map term-mode-map)
+  :bind (("C-c C-t a" . ansi-term) :map term-mode-map
          ("C-c C-j" . term-line-mode)
          ("C-c C-k" . term-char-mode)))
 

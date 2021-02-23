@@ -63,12 +63,12 @@
   :defer t
   :config (customize-set-variable 'py-isort-options `(,(format "-l %d" python-max-line-length))))
 
-;; TODO: to check
 (use-package
   sphinx-doc-mode
-  :bind ((:map sphinx-doc-mode-map)
-         ("C-c M-d" . nil)
-         ("C-c C-d" . sphinx-doc)))
+  :defer t
+  :bind (:map python-mode-map
+              ("C-c M-d" . nil)
+              ("C-c C-d" . sphinx-doc)))
 
 ;; format buffer
 (defun py-format-buffer ()
